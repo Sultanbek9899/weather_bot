@@ -1,2 +1,0 @@
-TOKEN = "2096976934:AAE06LfyiFmUR7nfaflhtnNgOT_5BMLBmdc"
-API_KEY = "345f0742d08579ba744326bad76061f7"  # for weather
