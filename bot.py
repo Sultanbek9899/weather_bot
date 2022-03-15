@@ -31,6 +31,17 @@ def echo(message):
         text = 'Пока, рад был поговорить'
         bot.send_message(message.chat.id, text)
 
+def check_temperature(temp):
+    if temp > 15:
+        return "На улице тепло , можете одеться свободно"
+    elif temp < 5: 
+        return "На улице очень холодно, следует одеть куртку"
+    elif temp < 15 and temp > 5:
+        return  "На улице холодновато, одентесь теплее"
+    else:
+        return "Неправильные данные температуру"
+
+
 #реакция нажатия на кнопки в сообщении 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
@@ -41,6 +52,7 @@ def callback_inline(call):
                 text = f'''
                     Температура в городе Бишкек: {data['temp_c']} 
                     Время в городе: {data['time']}
+                    {check_temperature(data['temp_c'])}
                 '''         
                 bot.edit_message_text(chat_id=call.message.chat.id, text=text,message_id=call.message.message_id, reply_markup=None)
             elif call.data == 'moscow':
@@ -48,6 +60,7 @@ def callback_inline(call):
                 text = f'''
                     Температура в городе Москва: {data['temp_c']} 
                     Время в городе: {data['time']}
+                    {check_temperature(data['temp_c'])}
                 '''  
                 bot.edit_message_text(chat_id=call.message.chat.id, text=text,message_id=call.message.message_id, reply_markup=None)
             elif call.data == 'almaty':
@@ -55,6 +68,7 @@ def callback_inline(call):
                 text = f'''
                     Температура в городе Алматы: {data['temp_c']} 
                     Время в городе: {data['time']}
+                    {check_temperature(data['temp_c'])}
                 ''' 
                 bot.edit_message_text(chat_id=call.message.chat.id, text=text,message_id=call.message.message_id, reply_markup=None)
             # remove inline buttons
